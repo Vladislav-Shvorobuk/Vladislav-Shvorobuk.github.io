@@ -138,6 +138,10 @@ function deleteModal (){
     del.addEventListener("click", function (event) {
         event.preventDefault(); 
         body.removeChild(div);
+        
+        let elWithClass = document.querySelector(".redBorder");
+        elWithClass.removeAttribute("style");
+        elWithClass.classList.remove('redBorder');
     })
 }
 
