@@ -39,13 +39,11 @@ function renderBlock() {
     container.style.right = "1%";
     container.style.border = "5px solid grey";
     container.style.width ="270px";
-    container.style.background = "rgb(185,195,195, 0.9)";
-
     
     dragDropBlock.style.width = "100%";
     dragDropBlock.style.height = "230px";
     dragDropBlock.style.paddingTop = "10px";
-    dragDropBlock.style.background = "#f8f9f9";
+    dragDropBlock.style.background = "rgb(210,218,218, 0.9)";
 
     let contentBlock = document.createElement("div");
 
