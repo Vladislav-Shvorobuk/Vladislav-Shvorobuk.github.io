@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function main () {
 
     renderBlock ();
+    addStyles ();
     searchNodeEl();
     searchNextNodeEl();
     searchPrevNodeEl();
@@ -31,88 +32,40 @@ function main () {
 main();
 
 
-
 function renderBlock() {
   
-    container.style.position = "fixed";
-    container.style.top = "20px";
-    container.style.right = "1%";
-    container.style.border = "5px solid grey";
-    container.style.width ="270px";
-    
-    dragDropBlock.style.width = "100%";
-    dragDropBlock.style.height = "230px";
-    dragDropBlock.style.paddingTop = "10px";
-    dragDropBlock.style.background = "rgb(210,218,218, 0.9)";
+    container.classList.add("containerFragment");
+    dragDropBlock.classList.add("dragDropBlock");
 
     let contentBlock = document.createElement("div");
 
+    del.classList.add("del");
     del.innerHTML = "🞫";
-    del.width = "10px";
-    del.height = "10px";
-    del.fontSize = "16px";
-    del.style.position = "absolute";
-    del.style.top = "0";
-    del.style.right = "4px";
-    del.style.cursor = "pointer";
 
     let h3 = document.createElement("h3");
-
+    h3.classList.add("h3");
     h3.innerHTML = "Search node element";
-    h3.style.color = "#24222e";   
-    h3.style.textAlign = "center";    
+ 
+    input.classList.add("input");
 
-    input.style.padding = "5px 10px";
-    input.style.border = "1px solid grey";
-    input.style.width ="80%";   
-    input.style.background = "white"; 
-    input.style.position = "absolute"; 
-    input.style.top = "60px"; 
-    input.style.left = "30px"; 
-    
+    search.classList.add("search");
     search.innerHTML = "search";
-    search.style.padding = "4px";
-    search.style.width ="80%";   
-    search.style.cursor = "pointer"; 
-    search.style.position = "absolute"; 
-    search.style.top = "100px"; 
-    search.style.left = "30px"; 
 
+    next.classList.add("nextNodeEl");
     next.innerHTML = "next";
-    next.style.padding = "4px";
-    next.style.width = "38.3%";
-    next.style.cursor = "pointer"; 
-    next.style.position = "absolute"; 
-    next.style.top = "135px"; 
-    next.style.left = "28px"; 
     next.disabled = true;
- 
-    previous.innerHTML = "previous";
-    previous.style.padding = "4px";
-    previous.style.width = "38.3%";
-    previous.style.cursor = "pointer"; 
-    previous.style.position = "absolute"; 
-    previous.style.top = "135px"; 
-    previous.style.left = "138px"; 
-    previous.disabled = true;
- 
-    parent.innerHTML = "parent";
-    parent.style.padding = "4px";
-    parent.style.width = "38.3%";
-    parent.style.cursor = "pointer"; 
-    parent.style.position = "absolute"; 
-    parent.style.top = "170px"; 
-    parent.style.left = "138px"; 
-    parent.disabled = true;
    
+    previous.classList.add("previousNodeEl");
+    previous.innerHTML = "previous";
+    previous.disabled = true;    
+ 
+    parent.classList.add("parent");
+    parent.innerHTML = "parent";
+    parent.disabled = true;   
+   
+    child.classList.add("child");
     child.innerHTML = "children";
-    child.style.padding = "4px";
-    child.style.width = "38.3%";
-    child.style.cursor = "pointer"; 
-    child.style.position = "absolute"; 
-    child.style.top = "170px"; 
-    child.style.left = "28px"; 
-    child.disabled = true;
+    child.disabled = true;    
     
     container.appendChild(del);
     container.appendChild(dragDropBlock);
@@ -129,6 +82,90 @@ function renderBlock() {
     fragment.appendChild(container);
     body.appendChild(fragment);
    
+}
+
+function addStyles () {
+    let styles = document.createElement("style");
+    styles.innerHTML =`
+
+    .containerFragment {
+        position: fixed;
+        top: 20px;
+        right: 1%;
+        border: 5px solid grey;
+        width: 270px;
+    }
+    .dragDropBlock {
+        width: 100%;
+        height: 230px;
+        padding-top: 10px;
+        background: rgb(210,218,218, 0.9);
+    }
+    .del {
+        width: 10px;
+        height: 10px;
+        font-size: 16px;
+        position: absolute;
+        top: 0;
+        right: 4px;
+        cursor: pointer;
+    }
+    .h3 {
+        color: #24222e;   
+        text-align: center;   
+    }
+    .input {
+        padding: 5px 10px;
+        border: 1px solid grey;
+        width: 80%;   
+        background: white; 
+        position: absolute; 
+        top: 60px; 
+        left: 30px; 
+    }
+    .search {   
+        padding: 4px;
+        width: 80%;   
+        cursor: pointer; 
+        position: absolute; 
+        top: 100px; 
+        left: 30px; 
+    }
+    .nextNodeEl {
+        padding: 4px;
+        width: 38.3%;
+        cursor: pointer; 
+        position: absolute; 
+        top: 135px; 
+        left: 28px; 
+    }
+    .previousNodeEl {
+        padding: 4px;
+        width: 38.3%;
+        cursor: pointer; 
+        position: absolute; 
+        top: 135px; 
+        left: 138px ;
+    }
+    .parent {
+        padding: 4px;
+        width: 38.3%;
+        cursor: pointer; 
+        position: absolute; 
+        top: 170px; 
+        left: 138px; 
+    }
+    .child {
+        padding: 4px;
+        width: 38.3%;
+        cursor: pointer; 
+        position: absolute; 
+        top: 170px; 
+        left: 28px; 
+    }
+    `
+    body.appendChild(styles);
+
 }
 
 function deleteModal (){
@@ -315,16 +352,14 @@ function dragAndDrop () {
 
   function getCoords(elem) { 
     let box = elem.getBoundingClientRect();
-    return {
-      top: box.top + pageYOffset,
-      left: box.left + pageXOffset
-    };
+         return {
+            top: box.top + pageYOffset,
+            left: box.left + pageXOffset
+         };
     }
 }
 
-
 }
-
 
 
 
