@@ -107,7 +107,7 @@ function addStyles () {
         font-size: 16px;
         position: absolute;
         top: 0;
-        right: 4px;
+        right: 10px;
         cursor: pointer;
     }
     .h3 {
