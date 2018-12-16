@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     let input = document.createElement("input");
     let elem;
 
+    let styles = document.createElement("style");
 
 function main () {
 
@@ -85,7 +86,7 @@ function renderBlock() {
 }
 
 function addStyles () {
-    let styles = document.createElement("style");
+  
     styles.innerHTML =`
 
     .containerFragment {
@@ -171,11 +172,16 @@ function addStyles () {
 function deleteModal (){
     del.addEventListener("click", function (event) {
         event.preventDefault(); 
-        body.removeChild(container);
-
+        
         let elWithClass = document.querySelector(".redBorder");
-        elWithClass.removeAttribute("style");
-        elWithClass.classList.remove('redBorder');
+        if(elWithClass) {
+            elWithClass.removeAttribute("style");
+            elWithClass.classList.remove('redBorder');
+        }
+        
+        body.removeChild(styles);
+        body.removeChild(container);
+        
     })
 }
 
@@ -330,7 +336,6 @@ function dragAndDrop () {
 
     body.appendChild(container);
 
-
     function moveAt(e) {
         container.style.left = e.pageX - shiftX + 'px';
         container.style.top = e.pageY - shiftY + 'px';
@@ -344,7 +349,6 @@ function dragAndDrop () {
         document.onmousemove = null;
         container.onmouseup = null;
       }
-
 
       container.ondragstart = function() {
     return false;
